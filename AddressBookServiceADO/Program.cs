@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace AddressBookService
+namespace AddressBookServiceADO
 {
     class Program
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Address Book Service");
             AddressBookRepository repository = new AddressBookRepository();
             ContactDetails details = new ContactDetails();
-            repository.GetDataInParticularDataRange();
+            repository.CountOfContacts();
         }
     }
 }

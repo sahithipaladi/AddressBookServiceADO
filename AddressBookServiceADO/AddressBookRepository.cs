@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBookService
+namespace AddressBookServiceADO
 {
     public class AddressBookRepository
     {
         public static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AddressBookService;";
         SqlConnection connection = new SqlConnection(connectionString);
 
+        //Retrieve all data from AddressBook Table
         //Retrieve all data from AddressBook Table
         public bool GetAllEmployee()
         {
@@ -138,6 +139,41 @@ namespace AddressBookService
             finally
             {
                 this.connection.Close(); //closing the connection
+            }
+        }
+
+        public void CountOfContacts()
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    //Query to perform
+                    string query = @"select City,COUNT(City) from Contact_Person GROUP BY City;";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    this.connection.Open(); //Opening the connection
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    //Checking if the table has data
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Console.WriteLine(dataReader.GetString(0) + " " + dataReader.GetInt32(1) + "\n");
+                        }
+                    }
+                    else
+                        Console.WriteLine("No data found");
+                    dataReader.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close(); //Closing the connection
             }
         }
     }
