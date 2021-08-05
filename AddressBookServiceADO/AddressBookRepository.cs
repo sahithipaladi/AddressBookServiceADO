@@ -13,7 +13,6 @@ namespace AddressBookServiceADO
         SqlConnection connection = new SqlConnection(connectionString);
 
         //Retrieve all data from AddressBook Table
-        //Retrieve all data from AddressBook Table
         public bool GetAllEmployee()
         {
             try
@@ -22,7 +21,7 @@ namespace AddressBookServiceADO
                 using (this.connection)
                 {
                     //Query to perfom
-                    string query = @"select * from AddressBookServiceTable";
+                    string query = @"select * from AddressBookTable";
                     SqlCommand command = new SqlCommand(query, this.connection);
                     this.connection.Open(); //Opening the connection
                     SqlDataReader dataReader = command.ExecuteReader();
@@ -70,7 +69,7 @@ namespace AddressBookServiceADO
             try
             {
                 //Query to perform
-                string query = @"update AddressBookTable set Address='TekkaMitta' where FirstName='Sameera'";
+                string query = @"update AddressBookServiceTable set Address='TekkaMitta' where FirstName='Sameera'";
                 SqlCommand cmd = new SqlCommand(query, this.connection);
                 this.connection.Open(); //Opening the connection
                 int result = cmd.ExecuteNonQuery();
@@ -176,5 +175,34 @@ namespace AddressBookServiceADO
                 this.connection.Close(); //Closing the connection
             }
         }
+
+        public bool InsertDataIntoTable(ContactDetails details)
+        {
+            try
+            {
+                //Query to perform
+                string query = @"Insert into AddressBookTable values('Mahendra','R','Magunta Layout','Nellore','AndhraPradesh',524003,9937348473,'mahendra@gamil.com','Office','Profession');";
+                SqlCommand cmd = new SqlCommand(query, this.connection);
+                this.connection.Open(); //Opening the connection
+                int result = cmd.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close(); //Closing the connection
+            }
+        }
     }
 }
+    
