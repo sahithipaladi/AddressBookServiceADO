@@ -69,7 +69,7 @@ namespace AddressBookService
             try
             {
                 //Query to perform
-                string query = @"update AddressBookServiceTable set Address='TekkaMitta' where FirstName='Sameera'";
+                string query = @"update AddressBookTable set Address='TekkaMitta' where FirstName='Sameera'";
                 SqlCommand cmd = new SqlCommand(query, this.connection);
                 this.connection.Open(); //Opening the connection
                 int result = cmd.ExecuteNonQuery();
@@ -89,6 +89,55 @@ namespace AddressBookService
             finally
             {
                 this.connection.Close(); //Closing the connection
+            }
+        }
+
+        public List<string> GetDataInParticularDataRange()
+        {
+            try
+            {
+                ContactDetails details = new ContactDetails();
+                List<string> data = new List<string>();
+                using (this.connection)
+                {
+                    //Query to perfom
+                    string query = @"select * from Contact_Person where AddedDate between CAST('2021-02-01' AS DATE) AND SYSDATETIME()";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    this.connection.Open(); //Opening the connection
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    //Checking if the table has data
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            details.FirstName = dataReader["FirstName"].ToString();
+                            details.LastName = dataReader["LastName"].ToString();
+                            details.Address = dataReader["Address"].ToString();
+                            details.City = dataReader["City"].ToString();
+                            details.State = dataReader["State"].ToString();
+                            details.zip = Convert.ToDecimal(dataReader["zip"]);
+                            details.PhoneNumber = Convert.ToDecimal(dataReader["phonenumber"]);
+                            details.Email = dataReader["Email"].ToString();
+                            Console.WriteLine(details.FirstName + " " + details.LastName + " " + details.Address + " " + details.City + " " + details.State + " " + details.zip + " " + details.PhoneNumber + " " + details.Email);
+                            Console.WriteLine("\n");
+                        }
+                        dataReader.Close();
+                        return data;
+                    }
+                    else
+                    {
+                        throw new Exception("No data found");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close(); //closing the connection
             }
         }
     }
