@@ -15,6 +15,6 @@ AS
 BEGIN
 	Insert into AddressBookServiceTable values(@FirstName,@LastName,@Address,@City,@State,@Zip,@PhoneNumber,@Email,@AddressBookName,@RelationType)
 	Insert into AddressBook(AddressBookName) values(@AddressBookName)
-	
+	Insert into Contact_Person(FirstName,LastName,Address,City,State,zip,PhoneNumber,Email,AddedDate) values(@FirstName,@LastName,@Address,@City,@State,@Zip,@PhoneNumber,@Email,GETDATE())
 	Insert into ContactType(ContactTypeName) values(@RelationType)
 END
