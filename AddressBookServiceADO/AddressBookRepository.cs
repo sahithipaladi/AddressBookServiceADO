@@ -69,7 +69,7 @@ namespace AddressBookService
             try
             {
                 //Query to perform
-                string query = @"update AddressBookServiceTable set Address='TekkaMitta' where FirstName='Sameera'";
+                string query = @"update AddressBookServiceTable set Address='n.g.o clony' where FirstName='Sahithi'";
                 SqlCommand cmd = new SqlCommand(query, this.connection);
                 this.connection.Open(); //Opening the connection
                 int result = cmd.ExecuteNonQuery();
