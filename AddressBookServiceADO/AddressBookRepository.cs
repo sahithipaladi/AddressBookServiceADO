@@ -69,7 +69,7 @@ namespace AddressBookServiceADO
             try
             {
                 //Query to perform
-                string query = @"update AddressBookServiceTable set Address='TekkaMitta' where FirstName='Sameera'";
+                string query = @"update AddressBookServiceTable set Address='n.g.o colony' where FirstName='Sahithi'";
                 SqlCommand cmd = new SqlCommand(query, this.connection);
                 this.connection.Open(); //Opening the connection
                 int result = cmd.ExecuteNonQuery();
@@ -181,7 +181,7 @@ namespace AddressBookServiceADO
             try
             {
                 //Query to perform
-                string query = @"Insert into AddressBookTable values('Mahendra','R','Magunta Layout','Nellore','AndhraPradesh',524003,9937348473,'mahendra@gamil.com','Office','Profession');";
+                string query = @"Insert into AddressBookTable values('Siaangi','p','Ayra Layout','Kadapa','AndhraPradesh',525678,99378734567,'Sivaangi@gamil.com','Office','Profession');";
                 SqlCommand cmd = new SqlCommand(query, this.connection);
                 this.connection.Open(); //Opening the connection
                 int result = cmd.ExecuteNonQuery();
